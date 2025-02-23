@@ -10,7 +10,7 @@ export default function Details({ route, navigation }: Props) {
     const { title, content, stock } = route.params;
 
     // update screen options using navigation.setOptions() method
-    useEffect(() => navigation.setOptions({ title }), [title]);
+    useEffect(() => navigation.setOptions({ title }), [navigation]);
 
     return (
         <View style={styles.container}>
