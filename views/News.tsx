@@ -5,7 +5,7 @@ export default function () {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff"/>
-            <Text>Settings Screen</Text>
+            <Text>News Screen</Text>
         </View>
     )
 }
