@@ -1,33 +1,33 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./views/Home";
-// import Settings from "./views/Settings";
 import { RoutesParams } from "./types";
-import Details from "./views/Details";
-import { Button } from "react-native";
+import { Platform } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-const Stack = createNativeStackNavigator<RoutesParams>();
+import Home from "./views/Home";
+import News from "./views/News";
+import Settings from "./views/Settings";
+
+const Tab = createBottomTabNavigator<RoutesParams>();
+const Drawer = createDrawerNavigator<RoutesParams>();
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
-                {/* <Stack.Screen name="Settings" component={Settings} /> */}
-                <Stack.Screen
-                    name="Details"
-                    component={Details}
-                    options={({ route }) => ({
-                        headerRight: () => (
-                            <Button
-                                title="Buy"
-                                onPress={() => console.log("buy item")}
-                                disabled={!route.params.stock}
-                            />
-                        )
-                    })}
-                />
-            </Stack.Navigator>
+            {Platform.OS === "ios" && (
+                <Tab.Navigator>
+                    <Tab.Screen name="Home" component={Home}/>
+                    <Tab.Screen name="News" component={News}/>
+                    <Tab.Screen name="Settings" component={Settings}/>
+                </Tab.Navigator>
+            )}
+            {Platform.OS === "android" && (
+                <Drawer.Navigator>
+                    <Drawer.Screen name="Home" component={Home}/>
+                    <Drawer.Screen name="News" component={News}/>
+                    <Drawer.Screen name="Settings" component={Settings}/>
+                </Drawer.Navigator>
+            )}
         </NavigationContainer>
     )
 }
